@@ -66,8 +66,8 @@
                     code:this.verifyCode
                 })
                     .then(res=>{
-                        console.log(res);
-                        localStorage.setItem('ele_login', true);
+                        // console.log(res);
+                        localStorage.setItem('ele_login', res.data.user._id); //登录成功存储userid
                         this.$router.push('/');
                     })
                     .catch(err=>{

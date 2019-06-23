@@ -5,6 +5,7 @@ import 'mint-ui/lib/style.css'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import qs from 'qs'
 
 import {Indicator} from 'mint-ui';
 
@@ -12,8 +13,15 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios;
 
 Vue.use(MintUI)
+
+//配置axios根路径
+axios.defaults.baseURL = 'https://ele-interface.herokuapp.com/';
+
 //请求拦截
 axios.interceptors.request.use(config => {
+        if (config.method === 'post') {
+            config.data = qs.stringify(config.data);
+        }
         //加载动画
         Indicator.open();
         return config;
